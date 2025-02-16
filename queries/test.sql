@@ -1,1 +1,3 @@
-select * from dune.hildobby.dataset_bitcoin_etf_addresses limit 10;
+select * 
+from dune.hildobby.dataset_bitcoin_etf_addresses 
+limit 100;
