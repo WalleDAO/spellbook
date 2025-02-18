@@ -1,4 +1,3 @@
-
 import requests
 import pandas as pd
 import os
@@ -12,11 +11,18 @@ DUNE_QUERY_ID = 4730817  # 替换为你想查询的 Dune 查询 ID
 dune = DuneClient(API_KEY)
 query_result = dune.get_latest_result(DUNE_QUERY_ID)
 
+# 打印 query_result 对象以查看其结构
+print(query_result)
+
 # 提取结果行数据
 rows = query_result.result.rows  # 直接使用 .rows 获取数据
 
 # 将数据转换为 DataFrame
 df = pd.DataFrame(rows)
+
+# 获取列名信息
+column_order = query_result.result.metadata.column_names
+df = df[column_order]  # 按Dune的列顺序重新排列
 
 # 获取桌面的路径
 desktop_path = os.path.expanduser('~/Desktop')
