@@ -5,7 +5,7 @@ from dune_client.client import DuneClient
 from datetime import datetime
 
 # 使用你的 Dune API 密钥
-API_KEY = "BBIZZhNA48tX06Ky8UMgDZ2V94oOUWcp"
+API_KEY = ""
 DUNE_QUERY_ID = 4730817  # 替换为你想查询的 Dune 查询 ID
 
 # 使用 DuneClient 获取查询结果
