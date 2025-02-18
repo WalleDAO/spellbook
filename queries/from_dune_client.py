@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import os
 from dune_client.client import DuneClient
+from datetime import datetime
 
 # 使用你的 Dune API 密钥
 API_KEY = "BBIZZhNA48tX06Ky8UMgDZ2V94oOUWcp"
@@ -24,14 +25,22 @@ df = pd.DataFrame(rows)
 column_order = query_result.result.metadata.column_names
 df = df[column_order]  # 按Dune的列顺序重新排列
 
-# 获取桌面的路径
+# 获取桌面路径
 desktop_path = os.path.expanduser('~/Desktop')
 
-# 构造保存文件的完整路径
-file_path = os.path.join(desktop_path, 'dune_query_result.csv')
+# 确保目录存在（一般桌面一定存在，但以防万一）
+if not os.path.exists(desktop_path):
+    os.makedirs(desktop_path)
 
-# 保存为 CSV 文件
+# 使用当前时间生成唯一文件名
+timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+file_name = f'dune_query_result_{timestamp}.csv'
+
+# 构造完整路径
+file_path = os.path.join(desktop_path, file_name)
+
+# 保存 DataFrame 为 CSV 文件
 df.to_csv(file_path, index=False)
 
+# 打印文件保存路径
 print(f"数据已成功保存为 {file_path}")
-
